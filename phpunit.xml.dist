@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+    colors="true"
+    bootstrap="vendor/autoload.php">
 
-<phpunit bootstrap="vendor/autoload.php"
-         processIsolation="false"
-         stopOnFailure="false"
-         syntaxCheck="false">
     <testsuites>
-        <testsuite name="Stringy">
-            <file>tests/StringyTest.php</file>
-            <file>tests/StaticStringyTest.php</file>
-            <file phpVersion="5.6.0">tests/CreateTest.php</file>
+        <testsuite name="unit">
+            <directory>tests/src/Unit/</directory>
         </testsuite>
     </testsuites>
+
+    <logging>
+        <testdoxHtml outputFile="reports/human/result/phpunit.html" />
+        <junit outputFile="reports/machine/result/phpunit.xml" />
+    </logging>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory>./src/</directory>
+        </include>
+
+        <report>
+            <text outputFile="php://stdout" />
+            <html outputDirectory="reports/human/coverage/phpunit.html" />
+            <clover outputFile="reports/machine/coverage/phpunit.clover.xml" />
+            <php outputFile="reports/machine/coverage/phpunit.php" />
+            <xml outputDirectory="reports/machine/coverage/phpunit.xml" />
+        </report>
+    </coverage>
 </phpunit>

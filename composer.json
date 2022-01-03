@@ -1,4 +1,6 @@
 {
+    "type": "library",
+    "license": "MIT",
     "name": "danielstjules/stringy",
     "description": "A string manipulation library with multibyte support",
     "keywords": [
@@ -6,7 +8,6 @@
         "helpers", "utils", "utf"
     ],
     "homepage": "https://github.com/danielstjules/Stringy",
-    "license": "MIT",
     "authors": [
         {
             "name": "Daniel St. Jules",
@@ -14,22 +15,54 @@
             "homepage": "http://www.danielstjules.com"
         }
     ],
-    "require": {
-        "php": ">=5.4.0",
-        "symfony/polyfill-mbstring": "~1.1"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~4.0"
-    },
     "support": {
         "issues": "https://github.com/danielstjules/Stringy/issues",
         "source": "https://github.com/danielstjules/Stringy"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "cweagans/composer-patches": true
+        },
+        "preferred-install": "dist",
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
+    "repositories": {},
+    "require": {
+        "php": ">=8.1",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "consolidation/robo": "^3.0",
+        "cweagans/composer-patches": "^1.7",
+        "phpstan/phpdoc-parser": "^1.2",
+        "phpunit/phpunit": "^9.5",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
     "autoload": {
-        "psr-4": { "Stringy\\": "src/" },
-        "files": ["src/Create.php"]
+        "psr-4": {
+            "Stringy\\": "src/"
+        },
+        "files": [
+            "src/Create.php"
+        ]
     },
     "autoload-dev": {
-        "classmap": [ "tests" ]
-    }
+        "psr-4": {
+            "Stringy\\Tests\\": "tests/src/"
+        }
+    },
+    "extra": {
+        "enable-patching": true,
+        "composer-exit-on-patch-failure": true,
+        "patches": {
+            "consolidation/annotated-command": {
+                "https://github.com/consolidation/annotated-command/issues/258 - CommandResult self vs static": "https://patch-diff.githubusercontent.com/raw/consolidation/annotated-command/pull/259.patch"
+            }
+        }
+    },
+    "scripts": {},
+    "scripts-descriptions": {}
 }
